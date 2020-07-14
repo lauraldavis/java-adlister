@@ -5,21 +5,21 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "HelloWorldServlet", urlPatterns = "/hello")
-public class HelloWorldServlet extends HttpServlet {
+@WebServlet(name = "ResumeServlet", urlPatterns = "/resume")
+public class ResumeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        String name = request.getParameter("name");
+        String content = "<h1>My Resume</h1>";
+        content += "<p>I write a lot of code. Check my GitHub</p>";
+        content += "<hr><br>";
+        content += "<a href='https://github.com/lauraldavis'>My GitHub Profile</a><br>";
+        content += "<a href='/portfolio'>My Portfolio</a>";
 
-        if(name == null){
-            name = "World";
-        }
-
-        out.println("Hello, " + name + "!");
-
+        out.println(content);
     }
+
 }
