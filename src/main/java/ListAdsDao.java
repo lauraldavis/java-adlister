@@ -37,6 +37,24 @@ public class ListAdsDao implements Ads {
             "JavaScript Developer needed",
             "Must have strong Java skills"
         ));
+        ads.add(new Ad(
+                5,
+                3,
+                "Database Developer needed",
+                "SQL Developer with T-SQL, SSIS, SSRS, Sharepoint exp preferred."
+        ));
+        ads.add(new Ad(
+                6,
+                3,
+                "Front End Developer",
+                "HTML/CSS/JavaScript and Photoshop experience"
+        ));
+        ads.add(new Ad(
+                7,
+                1,
+                "Sports watch fitness tracker for sale",
+                "Garmin Vivosmart HR, built in heart rate monitor."
+        ));
         return ads;
     }
 }
