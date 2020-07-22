@@ -28,7 +28,7 @@ public class MySQLAdsDao implements Ads {
         List<Ad> ads = new ArrayList<>();
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM ads");
+            ResultSet rs = stmt.executeQuery("SELECT id, user_id, title, description FROM ads");
             while (rs.next()) {
                 ads.add(new Ad(
                         rs.getLong("id"),
@@ -46,9 +46,15 @@ public class MySQLAdsDao implements Ads {
     @Override
     public Long insert(Ad ad) {
         long lastInsertedId = 0;
+        String insertQuery = String.format(
+                "INSERT INTO ads (user_id, title, description) " +
+                        "VALUES ('%d', '%s', '%s')",
+                ad.getUserId(),
+                ad.getTitle(),
+                ad.getDescription());
         try {
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate(String.format("INSERT INTO ads (user_id, title, description) VALUES ('%d', '%s', '%s')", ad.getUserId(), ad.getTitle(), ad.getDescription()), Statement.RETURN_GENERATED_KEYS);
+            stmt.executeUpdate(insertQuery, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
             lastInsertedId = rs.getLong(1);
