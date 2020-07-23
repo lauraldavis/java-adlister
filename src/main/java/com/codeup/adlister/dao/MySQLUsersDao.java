@@ -9,7 +9,7 @@ import java.sql.*;
 public class MySQLUsersDao implements Users {
     private Connection connection;
 
-    public MySQLUsersDao(Config config) {
+    public MySQLUsersDao(qqConfig config) {
         try {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
