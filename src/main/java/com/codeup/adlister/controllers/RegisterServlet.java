@@ -17,7 +17,7 @@ public class RegisterServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         // TODO: ensure the submitted information is valid
         // TODO: create a new user based off of the submitted information
         // TODO: if a user was successfully created, send them to their profile
@@ -27,11 +27,12 @@ public class RegisterServlet extends HttpServlet {
         String confirmPassword = request.getParameter("confirm-password");
 
         // check if username already exists
-        request.getSession().setAttribute("username-exists", DaoFactory.getUsersDao().findByUsername(username));
-        if (request.getSession().getAttribute("username-exists") != null) {
+        request.setAttribute("username-exists", DaoFactory.getUsersDao().findByUsername(username));
+        if (request.getAttribute("username-exists") != null) {
             // username already exists
-            // My TODO: display a message - That username is not available
-            response.sendRedirect("/register");
+            request.setAttribute("username-exists", true);
+                    // My TODO: display a message - That username is not available
+            request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
             return;
         }
 
