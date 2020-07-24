@@ -27,10 +27,10 @@ public class RegisterServlet extends HttpServlet {
         String confirmPassword = request.getParameter("confirm-password");
 
         // check if username already exists
-        request.setAttribute("username-exists", DaoFactory.getUsersDao().findByUsername(username));
-        if (request.getAttribute("username-exists") != null) {
+        request.setAttribute("user-exists", DaoFactory.getUsersDao().findByUsername(username));
+        if (request.getAttribute("user-exists") != null) {
             // username already exists
-            request.setAttribute("username-exists", true);
+            request.setAttribute("message", "That username is not available.");
                     // My TODO: display a message - That username is not available
             request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
             return;
